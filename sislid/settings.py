@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -120,8 +120,144 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+JAZZMIN_SETTINGS = {
+    # título da janela (padrão: current_admin_site.site_title se ausente ou None)
+    "site_title": "SISLID",
+
+    # Título na tela de login (máx. 19 caracteres) (padrão: current_admin_site.site_header se ausente ou None)
+    "site_header": "SISLID",
+
+    # Título da marca (máx. 19 caracteres) (padrão: current_admin_site.site_header se ausente ou None)
+    "site_brand": "SISLID",
+
+    # Logotipo para usar no seu site, deve estar presente em arquivos estáticos, usado para a marca no canto superior esquerdo
+    "site_logo": "img/logo.png",
+
+    # Logotipo para usar no formulário de login (padrão: site_logo)
+    "login_logo": "img/logo2.png",
+
+    # Logotipo para usar no formulário de login em temas escuros (padrão: login_logo)
+    "login_logo_dark": "img/logo2.png",
+
+    # Classes CSS que são aplicadas ao logotipo acima
+    "site_logo_classes": "img-square",
+
+    # Caminho relativo para um favicon para seu site, padrão: site_logo se ausente (idealmente 32x32 px)
+    "site_icon": "img/logo.png",
+
+    # Texto de boas-vindas na tela de login
+    "welcome_sign": "Bem-vindo ao SISLID",
+
+    # Direitos autorais no rodapé
+    "copyright": "Desenvolvido por Beatriz Machado",
+
+    # Lista de administrações de modelos para pesquisar na barra de pesquisa, barra de pesquisa omitida se excluída
+    # Se você deseja usar um único campo de pesquisa, não precisa usar uma lista, pode usar uma string simples
+    # "search_model": ["lideranca"],
+
+    # Nome do campo no modelo de usuário que contém avatar ImageField/URLField/Charfield ou um chamável que recebe o usuário
+    "user_avatar": None,
+
+    ############
+    # Menu Superior #
+    ############
+
+    # Links para colocar ao longo do menu superior
+    "topmenu_links": [
+
+        # URL que é revertida (Permissões podem ser adicionadas)
+        {"name": "Início",  "url": "admin:index", "permissions": ["auth.view_user"]},
+
+    ],
+
+    #############
+    # Menu do Usuário #
+    #############
+
+    # Links adicionais para incluir no menu do usuário no canto superior direito (tipo de url "app" não é permitido)
+    "usermenu_links": [
+        {"name": "Suporte", "url": "https://api.whatsapp.com/send?phone=5521991986769&text=", "new_window": True},
+        {"model": "auth.user"}
+    ],
+
+    #############
+    # Menu Lateral #
+    #############
+
+    # Se deve exibir o menu lateral
+    "show_sidebar": True,
+
+    # Se deve expandir automaticamente o menu
+    "navigation_expanded": True,
+
+    # Ocultar esses aplicativos ao gerar o menu lateral (por exemplo, auth)
+    "hide_apps": [],
+
+    # Ocultar esses modelos ao gerar o menu lateral (por exemplo, auth.user)
+    "hide_models": [],
+
+    # Lista de aplicativos (e/ou modelos) para basear a ordem do menu lateral (não precisa conter todos os aplicativos/modelos)
+    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+
+    # Links personalizados para adicionar aos grupos de aplicativos, chaveados no nome do aplicativo
+    "custom_links": {
+        "books": [{
+            "name": "Criar Mensagens", 
+            "url": "make_messages", 
+            "icon": "fas fa-comments",
+            "permissions": ["books.view_book"]
+        }]
+    },
+
+    # Ícones personalizados para aplicativos/modelos do menu lateral Veja https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
+    # para a lista completa de classes de ícones gratuitas 5.13.0
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    # Ícones usados quando um não é especificado manualmente
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+
+    #################
+    # Modal Relacionado #
+    #################
+    # Usar modais em vez de pop-ups
+    "related_modal_active": False,
+
+    #############
+    # Ajustes de UI #
+    #############
+    # Caminhos relativos para scripts CSS/JS personalizados (devem estar presentes em arquivos estáticos)
+    "custom_css": None,
+    "custom_js": None,
+    # Se deve vincular fonte de fonts.googleapis.com (use custom_css para fornecer fonte caso contrário)
+    "use_google_fonts_cdn": True,
+    # Se deve mostrar o personalizador de IU na barra lateral
+    "show_ui_builder": False,
+
+    ###############
+    # Formato de Visualização #
+    ###############
+    # Renderizar a visualização de alteração como um único formulário ou em guias, as opções atuais são
+    # - single
+    # - horizontal_tabs (padrão)
+    # - vertical_tabs
+    # - collapsible
+    # - carousel
+    "changeform_format": "horizontal_tabs",
+    # substituir formatos de formulário de alteração com base em administração de modelo
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+
+}
