@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    image: postgres
+    ports:
+      - "5432:5432"
+    depends_on:
+      - metabase
+
+  metabase:
+    container_name: metabase
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
