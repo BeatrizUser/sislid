@@ -1,5 +1,3 @@
-# admin.py
-
 from django.contrib import admin
 from .models import Lideranca, Pessoa
 
@@ -10,7 +8,7 @@ class PessoaAdmin(admin.ModelAdmin):
             'fields': ('nome', 'sexo', 'idade', 'lideranca')
         }),
         ('Título Eleitoral', {
-            'fields': ('titulo_eleitor', 'nome_mae', 'zona_eleitoral', 'secao_eleitoral'),
+            'fields': ('titulo_eleitor', 'nome_mae', 'nao_consta', 'zona_eleitoral', 'secao_eleitoral'),
         }),
         ('Endereço', {
             'fields': ('rua', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'),
