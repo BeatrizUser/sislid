@@ -1,8 +1,10 @@
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from .models import Lideranca, Pessoa
 
 class PessoaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'bairro', 'lideranca')
+    list_display = ('nome', 'bairro', 'lideranca','zona_eleitoral', 'validar_titulo')
     fieldsets = (
         (None, {
             'fields': ('nome', 'sexo', 'idade', 'lideranca')
@@ -14,6 +16,13 @@ class PessoaAdmin(admin.ModelAdmin):
             'fields': ('rua', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'),
         }),
     )
+    search_fields = ['lideranca__nome'] 
+
+    def validar_titulo(self, obj):
+        url = f"https://www.tse.jus.br/servicos-eleitorais/titulo-e-local-de-votacao/titulo-e-local-de-votacao"
+        return mark_safe(f'<a class="btn btn-success" href="{url}" target="_blank"><i class="fas fa-users mr-2"></i> Validar título eleitoral</a>')
+
+    validar_titulo.short_description = 'Validar título eleitoral'
 
 admin.site.register(Lideranca)
 admin.site.register(Pessoa, PessoaAdmin)

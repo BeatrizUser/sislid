@@ -1,5 +1,3 @@
-# models.py
-
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -24,9 +22,9 @@ class Pessoa(models.Model):
     rua = models.CharField(max_length=255, blank=True)
     numero = models.CharField(max_length=10, blank=True)
     complemento = models.CharField(max_length=255, blank=True, null=True)
-    bairro = models.CharField(max_length=100, blank=True)
-    cidade = models.CharField(max_length=100, blank=True)
-    estado = models.CharField(max_length=50, blank=True)
+    bairro = models.CharField(max_length=100)
+    cidade = models.CharField(max_length=100)  # Removido null=True
+    estado = models.CharField(max_length=50)
     cep = models.CharField(max_length=10)
     sexo = models.CharField(max_length=10, choices=SEXO_CHOICES)
     idade = models.IntegerField(blank=True, null=True)
@@ -53,6 +51,6 @@ class Pessoa(models.Model):
         return self.nome
 
 # Chama o método pesquisar_cep antes de salvar uma instância de Pessoa
-@receiver(pre_save, sender=Pessoa)
-def pre_save_pessoa(sender, instance, **kwargs):
-    instance.pesquisar_cep()
+# @receiver(pre_save, sender=Pessoa)
+# def pre_save_pessoa(sender, instance, **kwargs):
+#     instance.pesquisar_cep()
