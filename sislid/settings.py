@@ -238,6 +238,18 @@ JAZZMIN_SETTINGS = {
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",
 
+    "topmenu_links": [
+        {"name": "Início", 
+         "url": "admin:index", 
+         "permissions": ["auth.view_user"]},
+        {
+            "name": "Análises",
+            "url": "http://localhost:3000/question/1-pessoas-lid-por-bairro",
+            "new_window": True,
+            "permissions": ["auth.view_user"],  
+        },
+    ],
+
     #################
     # Modal Relacionado #
     #################
@@ -268,4 +280,36 @@ JAZZMIN_SETTINGS = {
     # substituir formatos de formulário de alteração com base em administração de modelo
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
 
+    
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": "navbar-teal",
+    "accent": "navbar-teal",
+    "navbar": "navbar-success navbar-dark",
+    "no_navbar_border": True,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": True,
+    "sidebar_nav_flat_style": True,
+    "theme": "darkly",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-outline-danger",
+        "success": "btn-success"
+    }
 }
