@@ -35,6 +35,27 @@ class Pessoa(models.Model):
     nao_consta = models.BooleanField(default=False)
     lideranca = models.ForeignKey(Lideranca, on_delete=models.CASCADE)
 
+class Pergunta(models.Model):
+    nome = models.CharField(max_length=100)
+    telefone = models.CharField(max_length=20)
+    OPCOES = [
+        ('Reclamacao', 'Reclamacao'),
+        ('Denuncia', 'Denuncia'),
+        ('Sugestao', 'Sugestao'),
+        ('Critica', 'Critica'),
+        ('Elogio', 'Elogio'),
+        ('Mensagem', 'Mensagem'),
+    ]
+    tipo = models.CharField(max_length=20, choices=OPCOES)
+    mensagem = models.TextField()
+    data_hora_envio = models.DateTimeField(auto_now_add=True)
+
+def short_date_time_format(self):
+        return self.data_hora_envio.strftime('%d/%m/%Y - %H:%M')
+
+def __str__(self):
+    return self.nome
+
     # Método para realizar a pesquisa de CEP
     def pesquisar_cep(self):
         cep = re.sub(r'\D', '', self.cep)

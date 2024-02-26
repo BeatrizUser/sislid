@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import Lideranca, Pessoa
+from .models import *
 
 class PessoaAdmin(admin.ModelAdmin):
     list_display = ('nome', 'bairro', 'lideranca','zona_eleitoral', 'validar_titulo')
@@ -24,5 +24,14 @@ class PessoaAdmin(admin.ModelAdmin):
 
     validar_titulo.short_description = 'Validar título eleitoral'
 
+class PerguntaAdmin(admin.ModelAdmin):
+    list_display = ['nome', 'telefone', 'tipo', 'mensagem', 'formatted_date_time']
+
+    def formatted_date_time(self, obj):
+        return obj.data_hora_envio.strftime('%d/%m/%Y - %H:%M')
+
+    formatted_date_time.short_description = 'Data e Hora de Envio'
+
+admin.site.register(Pergunta, PerguntaAdmin)
 admin.site.register(Lideranca)
 admin.site.register(Pessoa, PessoaAdmin)
