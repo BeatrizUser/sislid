@@ -4,12 +4,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perguntas</title>
     <!-- Adicione o CSS do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'templates/assets/fala zito.png' %}" />
     <style>
         .bg-image {
             background-image: url('{% static "templates/assets/sg.jpg" %}');
+            filter: blur(5%);
         }
     </style>
 </head>
@@ -17,24 +20,22 @@
 <body>
     <div class="container-fluid p-0 vh-100 d-flex align-items-center justify-content-center position-relative bg-image">
         <div class="container">
-            <div class="row bg-secondary-subtle p-5">
+            <div class="row bg-light-subtle p-3 rounded">
                 <!-- Coluna com a mensagem carinhosa -->
                 <div class="col-md-4">
-                    <div class="mensagem-carinhosa text-center p-4 bg-light-subtle">
+                    <div class="mensagem-carinhosa text-center p-4 bg-light rounded">
                         <img src="{% static 'templates/assets/fala zito.png' %}" class="img-fluid mb-3"
                             alt="Imagem Carinhosa">
-                        <div class="text-start">
-                            <p class="fw-bold text-center">Olá, amiga(o)!</p>
-                            <p class="mb-0">Aqui quem fala é o Ricardo Zito, candidato a vereador de São Gonçalo.</p>
-                            <p class="mb-0 fw-bold mt-3">Estou feliz em te ver por aqui!</p>
-                            <p class="mb-0 mt-3">Seja muito bem-vindo(a) à nossa plataforma, um
-                                espaço aberto para trocarmos ideias, sugestões e construirmos juntos um futuro melhor para a
-                                nossa cidade.</p>
-                            <p class="fw-bold mt-3 text-center">Conto com você! 💙🌟</p>
+                        <div class="text-start d-none d-md-block">
+                            <p class="fw-bold">Olá, amiga(o)!</p>
+                            <p>Aqui quem fala é o Ricardo Zito, candidato a vereador de São Gonçalo.</p>
+                            <p class="fw-bold">Estou feliz em te ver por aqui!</p>
+                            <p>Seja muito bem-vindo(a) à nossa plataforma, um espaço aberto para trocarmos ideias,
+                                sugestões e construirmos juntos um futuro melhor para a nossa cidade.</p>
+                            <p class="fw-bold">Conto com você! 💙🌟</p>
                         </div>
                     </div>
                 </div>
-
                 <!-- Coluna com o formulário -->
                 <div class="col-md-8">
                     <form method="POST">
@@ -62,7 +63,7 @@
         </div>
 
         <!-- Rodapé -->
-        <footer class="fixed-bottom bg-primary-subtle p-3 text-center">
+        <footer class="fixed-bottom bg-light p-3 text-center">
             <p class="m-0">Desenvolvido por Beatriz Machado</p>
         </footer>
     </div>

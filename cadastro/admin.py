@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 from .models import *
 
 class PessoaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'bairro', 'lideranca','zona_eleitoral', 'validar_titulo')
+    list_display = ('nome', 'bairro', 'lideranca','zona_eleitoral', 'secao_eleitoral', 'validar_titulo')
     fieldsets = (
         (None, {
             'fields': ('nome', 'sexo', 'idade', 'lideranca')
