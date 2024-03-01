@@ -107,19 +107,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
+LANGUAGE_CODE = 'pt-br'  # Define o idioma padrão para português brasileiro
 
-LANGUAGE_CODE = 'pt-br'
+TIME_ZONE = 'America/Sao_Paulo'  # Define o fuso horário para América/São_Paulo
 
-TIME_ZONE = 'UTC'
+USE_I18N = True  # Habilita a internacionalização
 
-USE_I18N = True
+USE_L10N = True  # Habilita a localização
 
-USE_L10N = True
-
-USE_TZ = True
-
+USE_TZ = True  # Habilita o suporte a fuso horário
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -172,18 +168,6 @@ JAZZMIN_SETTINGS = {
 
     # Nome do campo no modelo de usuário que contém avatar ImageField/URLField/Charfield ou um chamável que recebe o usuário
     "user_avatar": None,
-
-    ############
-    # Menu Superior #
-    ############
-
-    # Links para colocar ao longo do menu superior
-    "topmenu_links": [
-
-        # URL que é revertida (Permissões podem ser adicionadas)
-        {"name": "Início",  "url": "admin:index", "permissions": ["auth.view_user"]},
-
-    ],
 
     #############
     # Menu do Usuário #
@@ -262,7 +246,7 @@ JAZZMIN_SETTINGS = {
     # Se deve vincular fonte de fonts.googleapis.com (use custom_css para fornecer fonte caso contrário)
     "use_google_fonts_cdn": True,
     # Se deve mostrar o personalizador de IU na barra lateral
-    "show_ui_builder": False,
+    "show_ui_builder": True,
 
     ###############
     # Formato de Visualização #
@@ -286,24 +270,25 @@ JAZZMIN_UI_TWEAKS = {
     "body_small_text": True,
     "brand_small_text": False,
     "brand_colour": "navbar-teal",
-    "accent": "navbar-teal",
-    "navbar": "navbar-success navbar-dark",
+    "accent": "accent-teal",
+    "navbar": "navbar-teal navbar-dark",
     "no_navbar_border": True,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": False,
     "sidebar_fixed": True,
+    "sidebar": "sidebar-light-olive",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": True,
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": True,
     "sidebar_nav_flat_style": True,
-    "theme": "darkly",
-    "dark_mode_theme": "darkly",
+    "theme": "flatly",
+    "dark_mode_theme": None,
     "button_classes": {
-        "primary": "btn-primary",
-        "secondary": "btn-secondary",
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
         "info": "btn-info",
         "warning": "btn-warning",
         "danger": "btn-outline-danger",

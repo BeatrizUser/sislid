@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import *
+from .utils import preencher_local_de_votacao
+from .models import Pessoa, Pergunta, Lideranca
 
 class PessoaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'bairro', 'lideranca','zona_eleitoral', 'secao_eleitoral', 'validar_titulo')
+    list_display = ('nome', 'bairro', 'lideranca', 'zona_eleitoral', 'secao_eleitoral', 'validar_titulo')
     fieldsets = (
         (None, {
             'fields': ('nome', 'sexo', 'idade', 'lideranca')
@@ -19,10 +19,19 @@ class PessoaAdmin(admin.ModelAdmin):
     search_fields = ['lideranca__nome'] 
 
     def validar_titulo(self, obj):
-        url = f"https://www.tse.jus.br/servicos-eleitorais/titulo-e-local-de-votacao/titulo-e-local-de-votacao"
-        return mark_safe(f'<a class="btn btn-success" href="{url}" target="_blank"><i class="fas fa-users mr-2"></i> Validar título eleitoral</a>')
+        if obj.zona_eleitoral and obj.secao_eleitoral:
+            local, _, _, _ = preencher_local_de_votacao(int(obj.zona_eleitoral), int(obj.secao_eleitoral))
+            if local:
+                return local
+            else:
+                return "Local de votação não encontrado"
+        else:
+            return "Zona e/ou seção eleitoral não informadas"
 
-    validar_titulo.short_description = 'Validar título eleitoral'
+    validar_titulo.short_description = 'Local de Votação'
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('lideranca')  # Otimização para evitar queries adicionais
 
 class PerguntaAdmin(admin.ModelAdmin):
     list_display = ['nome', 'telefone', 'tipo', 'mensagem', 'formatted_date_time']
@@ -35,3 +44,4 @@ class PerguntaAdmin(admin.ModelAdmin):
 admin.site.register(Pergunta, PerguntaAdmin)
 admin.site.register(Lideranca)
 admin.site.register(Pessoa, PessoaAdmin)
+
