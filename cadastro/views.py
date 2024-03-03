@@ -1,8 +1,5 @@
 from django.http import JsonResponse
 import requests
-from django.shortcuts import render, redirect
-from .models import Pergunta
-from .forms import PerguntaForm
 
 def consultar_endereco(request):
     if request.method == 'GET' and request.is_ajax():
@@ -19,15 +16,3 @@ def consultar_endereco(request):
                 }
                 return JsonResponse(endereco)
     return JsonResponse({'error': 'CEP não encontrado'}, status=400)
-
-def perguntas(request):
-    if request.method == 'POST':
-        form = PerguntaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('perguntas')
-    else:
-        form = PerguntaForm()
-    perguntas = Pergunta.objects.all()
-    return render(request, 'perguntas.html', {'form': form, 'perguntas': perguntas})
-

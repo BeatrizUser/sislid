@@ -37,14 +37,6 @@ class PessoaAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('lideranca')  # Otimização para evitar queries adicionais
 
-class PerguntaAdmin(admin.ModelAdmin):
-    list_display = ['nome', 'telefone', 'tipo', 'mensagem', 'formatted_date_time']
-
-    def formatted_date_time(self, obj):
-        return obj.data_hora_envio.strftime('%d/%m/%Y - %H:%M')
-
-    formatted_date_time.short_description = 'Data e Hora de Envio'
-
 def preencher_local_de_votacao_cached(zona, secao):
     CACHE_FILE = "locais.json"
     try:
@@ -83,6 +75,6 @@ class LiderancaAdmin(admin.ModelAdmin):
 
     exibir_foto.short_description = 'Foto'
 
-admin.site.register(Pergunta, PerguntaAdmin)
+
 admin.site.register(Lideranca, LiderancaAdmin)
 admin.site.register(Pessoa, PessoaAdmin)
