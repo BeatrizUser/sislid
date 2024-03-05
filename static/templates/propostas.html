@@ -1,0 +1,37 @@
+{% extends "home.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+{% block title %}
+  <title>Sobre</title>
+{% endblock %}
+
+{% block about %}
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{% static 'templates/images/ricardo1.jpg' %}" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                Ricardo Zito
+              </h2>
+            </div>
+            <p>
+            Um verdadeiro Gonçalense de coração! Com sua energia contagiante, Ricardo está se candidatando a vereador, e ele tem grandes ideias para nossa cidade. Ele é o tipo de pessoa que não descansa até garantir que todos tenham acesso à saúde e educação de qualidade. Com Ricardo, São Gonçalo tem a chance de brilhar ainda mais! Vamos juntos apoiar quem realmente se importa com o nosso bem-estar e futuro.<br>Ricardo Zito, o candidato que é um de nós!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end about section -->
+  <div class="body_bg layout_padding">
+{% endblock %}

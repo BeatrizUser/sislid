@@ -1,0 +1,24 @@
+[0;1;32m●[0m docker.service - Docker Application Container Engine
+     Loaded: loaded (]8;;file://fedora/usr/lib/systemd/system/docker.service/usr/lib/systemd/system/docker.service]8;;; [0;1;32menabled[0m; preset: [0;1;38;5;185mdisabled[0m)
+    Drop-In: /usr/lib/systemd/system/service.d
+             └─]8;;file://fedora/usr/lib/systemd/system/service.d/10-timeout-abort.conf10-timeout-abort.conf]8;;
+     Active: [0;1;32mactive (running)[0m since Mon 2024-03-04 15:12:33 -03; 1h 0min ago
+TriggeredBy: [0;1;32m●[0m docker.socket
+       Docs: ]8;;https://docs.docker.comhttps://docs.docker.com]8;;
+   Main PID: 1204 (dockerd)
+      Tasks: 14
+     Memory: 169.4M
+        CPU: 1.201s
+     CGroup: /system.slice/docker.service
+             └─[0;38;5;245m1204 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock[0m
+
+mar 04 15:12:29 fedora dockerd[1204]: time="2024-03-04T15:12:29.116100166-03:00" level=info msg="Firewalld: interface br-1eaf84462d29 already part of docker zone, returning"
+mar 04 15:12:29 fedora dockerd[1204]: time="2024-03-04T15:12:29.311504345-03:00" level=info msg="Firewalld: interface docker0 already part of docker zone, returning"
+mar 04 15:12:29 fedora dockerd[1204]: time="2024-03-04T15:12:29.470134621-03:00" level=info msg="Firewalld: interface br-f8a03bb8e11f already part of docker zone, returning"
+mar 04 15:12:30 fedora dockerd[1204]: time="2024-03-04T15:12:30.164359648-03:00" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address"
+mar 04 15:12:30 fedora dockerd[1204]: time="2024-03-04T15:12:30.309517258-03:00" level=info msg="Firewalld: interface docker0 already part of docker zone, returning"
+mar 04 15:12:30 fedora dockerd[1204]: time="2024-03-04T15:12:30.461797601-03:00" level=info msg="Loading containers: done."
+mar 04 15:12:31 fedora dockerd[1204]: time="2024-03-04T15:12:31.734401395-03:00" level=info msg="Docker daemon" commit=f417435 containerd-snapshotter=false storage-driver=overlay2 version=25.0.3
+mar 04 15:12:31 fedora dockerd[1204]: time="2024-03-04T15:12:31.735169888-03:00" level=info msg="Daemon has completed initialization"
+mar 04 15:12:33 fedora dockerd[1204]: time="2024-03-04T15:12:33.075049734-03:00" level=info msg="API listen on /run/docker.sock"
+mar 04 15:12:33 fedora systemd[1]: Started docker.service - Docker Application Container Engine.
