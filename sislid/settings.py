@@ -235,6 +235,12 @@ JAZZMIN_SETTINGS = {
             "new_window": True,
             "permissions": ["auth.view_user"],  
         },
+        {
+            "name": "Site",
+            "url": "/blog/home",
+            "new_window": True,
+            "permissions": ["auth.view_user"],  
+        },
     ],
 
     #################
@@ -252,7 +258,7 @@ JAZZMIN_SETTINGS = {
     # Se deve vincular fonte de fonts.googleapis.com (use custom_css para fornecer fonte caso contrário)
     "use_google_fonts_cdn": True,
     # Se deve mostrar o personalizador de IU na barra lateral
-    "show_ui_builder": True,
+    "show_ui_builder": False,
 
     ###############
     # Formato de Visualização #

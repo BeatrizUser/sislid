@@ -60,10 +60,13 @@
                   <a class="nav-link" href="{% url 'home' %}">Início <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'sobre' %}"> Sobre </a>
+                  <a class="nav-link btn-1" href="#sobre"> Sobre </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'propostas' %}"> Propostas </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link btn-1" href="#contato"> Contato </a>
                 </li>
               </ul>
               <form class="form-inline">
@@ -90,7 +93,7 @@
                         Conheça Ricardo Zito, um verdadeiro São Gonçalense comprometido com o bem-estar de nossa cidade.
                       </p>
                       <div class="btn-box">
-                        <a href="" class="btn-1">
+                        <a href="#contato" class="btn-1">
                           Entre em Contato
                         </a>
                       </div>
@@ -106,7 +109,7 @@
 {% block about %}
   <!-- about section -->
 
-  <section class="about_section layout_padding">
+  <section id="sobre" class="about_section layout_padding">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -118,7 +121,7 @@
             </div>
             <p>
             Conheça Ricardo Zito, um verdadeiro Gonçalense de coração! Com sua energia contagiante, Ricardo está se candidatando a vereador, e ele tem grandes ideias para nossa cidade. Ele é o tipo de pessoa que não descansa até garantir que todos tenham acesso à saúde e educação de qualidade. Com Ricardo, São Gonçalo tem a chance de brilhar ainda mais! Vamos juntos apoiar quem realmente se importa com o nosso bem-estar e futuro.<br>Ricardo Zito, o candidato que é um de nós!             </p>
-            <a href="">
+            <a class="nav" href="">
               Saiba mais
             </a>
           </div>
@@ -137,7 +140,7 @@
 
     <!-- contact section -->
 <section class="contact_section">
-  <div class="container contact_bg">
+  <div id="contato" class="container contact_bg">
     <div class="row">
       <div class="col-md-5">
         <div class="img-box">
@@ -311,9 +314,22 @@
   </section>
   <!-- footer section -->
 {% endblock %}
-
-  <script type="text/javascript" src="{% static 'templates/js/jquery-3.4.1.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'templates/js/bootstrap.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.btn-1').on('click', function(e) {
+      e.preventDefault();
+      var target = $($(this).attr('href'));
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1500); // Tempo de duração da animação em milissegundos (1000ms = 1s)
+      }
+    });
+  });
+</script>
+<script type="text/javascript" src="{% static 'templates/js/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'templates/js/bootstrap.js' %}"></script>
 
 </body>
 
