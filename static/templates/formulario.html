@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'templates/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'templates/css/formcss.css' %}"
+    />
+    <script
+      type="text/javascript"
+      src="{% static 'templates/js/jquery-3.4.1.min.js' %}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{% static 'templates/js/bootstrap.js' %}"
+    ></script>
+    <title>Cadastro Social</title>
+  </head>
+  <body>
+    <div class="d-flex align-items-center justify-content-center">
+      <h3>Cadastro Social</h3>
+    </div>
+    <div class="container">
+      <form method="post">
+        {% csrf_token %}
+        <div class="row">
+          <h5>Informações Pessoais</h5>
+          <div class="input-group input-group-icon">
+            <input type="text" name="nome" placeholder="Nome Completo" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="email" name="email" placeholder="Endereço de Email" />
+          </div>
+          <h5>Endereco</h5>
+          <div class="input-group input-group-icon">
+            <input type="text" name="rua" placeholder="Rua" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="numero" placeholder="Número" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="complemento" placeholder="Complemento" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="bairro" placeholder="Bairro" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="cidade" placeholder="Cidade" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="estado" placeholder="Estado" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="cep" placeholder="CEP" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="sexo" placeholder="Sexo" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="idade" placeholder="Idade" />
+          </div>
+          <h5>Informações Adicionais</h5>
+          <div class="input-group input-group-icon">
+            <input
+              type="text"
+              name="titulo_eleitor"
+              placeholder="Título de Eleitor"
+            />
+          </div>
+          <div class="input-group input-group-icon">
+            <input
+              type="text"
+              name="zona_eleitoral"
+              placeholder="Zona Eleitoral"
+            />
+          </div>
+          <div class="input-group input-group-icon">
+            <input
+              type="text"
+              name="secao_eleitoral"
+              placeholder="Seção Eleitoral"
+            />
+          </div>
+          <div class="input-group input-group-icon">
+            <input
+              type="text"
+              name="local_de_votacao"
+              placeholder="Local de Votação"
+            />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="text" name="nome_mae" placeholder="Nome da Mãe" />
+          </div>
+          <div class="input-group input-group-icon">
+            <input type="checkbox" name="nao_consta" id="nao_consta" />
+            <label for="nao_consta">Não Consta</label>
+          </div>
+          <h5>Responsavel</h5>
+          <div class="input-group input-group-icon">
+            <select name="lideranca">
+              <option value="">Selecione uma Liderança</option>
+              <!-- Inserir as opções de liderança aqui -->
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-warning btn-lg">Enviar</button>
+      </form>
+    </div>
+  </body>
+</html>
