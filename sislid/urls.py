@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('gabineteonline/', include('gabineteOnline.urls')),
     path('blog/', include('blogZito.urls')),
     path('areacolaborador/', include('gabineteOnline.urls')),
     path('admin/logout/', auth_views.LogoutView.as_view(), name='logout'),

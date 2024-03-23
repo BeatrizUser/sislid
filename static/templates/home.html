@@ -14,9 +14,9 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-{% block title %}
+  {% block title %}
   <title>Ricardo Zito</title>
-{% endblock %}
+  {% endblock %}
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -38,10 +38,10 @@
 </head>
 
 <body>
-  <div class="hero_area">
+  {% block header %}
+  <div class="hero_area {% if request.resolver_match.view_name != 'home' %} auto_height {% endif %}">
     <!-- header section strats -->
     <header class="header_section">
-{% block header %}
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
           <a class="navbar-brand mr-5" href="{% url 'home' %}">
@@ -79,42 +79,45 @@
           </div>
         </nav>
       </div>
-{% endblock %}
     </header>
+    {% endblock %}
     <!-- end header section -->
-
-{% block slider %}
+    {% if request.resolver_match.view_name == 'home' %}
+    {% block slider %}
     <!-- slider section -->
-    <section class=" slider_section position-relative">
+    <section class="mt-4 slider_section position-relative">
       <div class="container">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <div>
-                      <h1>
-                        Bem-vindo! <br>
-                      </h1>
-                      <p>
-                        Conheça Ricardo Zito, um verdadeiro Gonçalense comprometido com o bem-estar de nossa cidade.
-                      </p>
-                      <div class="btn-box">
-                        <a href="#contato" class="btn-1">
-                          Entre em Contato
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+        <div class="row">
+          <div class="col-md-7">
+            <div class="detail-box">
+              <div>
+                <h1>
+                  Bem-vindo! <br>
+                </h1>
+                <p>
+                  Conheça Ricardo Zito, um verdadeiro Gonçalense comprometido com o bem-estar de nossa cidade.
+                </p>
+                <div class="btn-box">
+                  <a href="#contato" class="btn-1">
+                    Entre em Contato
+                  </a>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- end slider section -->
   </div>
-{% endblock %}
-{% block blog %}
-  
-{% endblock %}
-{% block about %}
+  {% endblock %}
+  {% endif %}
+  {% block blog %}
+  <!-- AQUI VAI O CONTEUDO DO BLOG-->
+  {% endblock %}
+  {% block post %}
+  <!-- AQUI VAI O CONTEUDO DO POST -->
+  {% endblock %}
   <!-- about section -->
 
   <section id="sobre" class="about_section layout_padding">
@@ -128,7 +131,11 @@
               </h2>
             </div>
             <p>
-            Conheça Ricardo Zito, um verdadeiro Gonçalense de coração! Com sua energia contagiante, Ricardo está se candidatando a vereador, e ele tem grandes ideias para nossa cidade. Ele é o tipo de pessoa que não descansa até garantir que todos tenham acesso à saúde e educação de qualidade. Com Ricardo, São Gonçalo tem a chance de brilhar ainda mais! Vamos juntos apoiar quem realmente se importa com o nosso bem-estar e futuro.<br>Ricardo Zito, o candidato que é um de nós!             </p>
+              Conheça Ricardo Zito, um verdadeiro Gonçalense de coração! Com sua energia contagiante, Ricardo está se
+              candidatando a vereador, e ele tem grandes ideias para nossa cidade. Ele é o tipo de pessoa que não
+              descansa até garantir que todos tenham acesso à saúde e educação de qualidade. Com Ricardo, São Gonçalo
+              tem a chance de brilhar ainda mais! Vamos juntos apoiar quem realmente se importa com o nosso bem-estar e
+              futuro.<br>Ricardo Zito, o candidato que é um de nós! </p>
             <a class="nav" href="">
               Saiba mais
             </a>
@@ -144,200 +151,76 @@
   </section>
   <!-- end about section -->
   <div class="body_bg layout_padding">
-{% endblock %}
 
     <!-- contact section -->
-<section class="contact_section">
-  <div id="contato" class="container contact_bg">
-    <div class="row">
-      <div class="col-md-5">
-        <div class="img-box">
-          <img src="{% static 'templates/assets/fala zito.png' %}" class="img-fluid mb-3" alt="Imagem Carinhosa">
-          <div class="text-start d-none d-md-block">
-              <p class="fw-bold">Olá, amiga(o)!</p>
-              <p>Seja muito bem-vindo(a) à nossa plataforma, um espaço aberto para trocarmos ideias,
+    <section class="contact_section">
+      <div id="contato" class="container contact_bg">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="img-box">
+              <img src="{% static 'templates/assets/fala zito.png' %}" class="img-fluid mb-3" alt="Imagem Carinhosa">
+              <div class="text-start d-none d-md-block">
+                <p class="fw-bold">Olá, amiga(o)!</p>
+                <p>Seja muito bem-vindo(a) à nossa plataforma, um espaço aberto para trocarmos ideias,
                   sugestões e construirmos juntos um futuro melhor para a nossa cidade.</p>
-              <p class="fw-bold">Conto com você! 💙🌟</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-7">
-        <div class="contact_form">
-          <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-              {{ form.nome }}
-            </div>
-            <div class="mb-3">
-              {{ form.telefone }}
-            </div>
-            <div class="mb-3">
-              <label for="exampleDataList" class="form-label">Tipo de Mensagem:</label>
-              {{ form.tipo }}
-            </div>
-            <div class="mb-3">
-              <label for="exampleDataList" class="form-label">Seu Bairro:</label>
-              {{ form.bairro_sao_goncalo }}
-            </div>
-            <div class="mb-3">
-              {{ form.mensagem }}
-            </div>
-            <button class="btn btn-primary" type="submit">Enviar</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</section>
-    <!-- end contact section -->
-
-    <!-- client section -->
-
-    {% comment %} <section class="client_section layout_padding-top">
-      <div class="d-flex justify-content-center">
-        <div class="heading_container">
-          <h2>
-            Testimonial
-          </h2>
-        </div>
-      </div>
-      <div class="container layout_padding2">
-        <div id="carouselExample2Indicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExample2Indicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExample2Indicators" data-slide-to="1"></li>
-            <li data-target="#carouselExample2Indicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item ">
-              <div class="client_container">
-                <div class="client-id">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="">
-                  </div>
-                  <div class="client_name">
-                    <div>
-                      <h3>
-                        Johndue
-                      </h3>
-                      <p>
-                        Farm & CO
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="client_detail">
-                  <div class="client_text">
-                    <blockquote>
-                      <p>
-                        ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                      </p>
-                    </blockquote>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item active">
-              <div class="client_container">
-                <div class="client-id">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="">
-                  </div>
-                  <div class="client_name">
-                    <div>
-                      <h3>
-                        Johndue
-                      </h3>
-                      <p>
-                        Farm & CO
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="client_detail">
-                  <div class="client_text">
-                    <blockquote>
-                      <p>
-                        ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                      </p>
-                    </blockquote>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item ">
-              <div class="client_container">
-                <div class="client-id">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="">
-                  </div>
-                  <div class="client_name">
-                    <div>
-                      <h3>
-                        Johndue
-                      </h3>
-                      <p>
-                        Farm & CO
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="client_detail">
-                  <div class="client_text">
-                    <blockquote>
-                      <p>
-                        ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                      </p>
-                    </blockquote>
-                  </div>
-                </div>
+                <p class="fw-bold">Conto com você! 💙🌟</p>
               </div>
             </div>
           </div>
+          <div class="col-md-7">
+            <div class="contact_form">
+              <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                  {{ form.nome }}
+                </div>
+                <div class="mb-3">
+                  {{ form.telefone }}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleDataList" class="form-label">Tipo de Mensagem:</label>
+                  {{ form.tipo }}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleDataList" class="form-label">Seu Bairro:</label>
+                  {{ form.bairro_sao_goncalo }}
+                </div>
+                <div class="mb-3">
+                  {{ form.mensagem }}
+                </div>
+                <button class="btn btn-primary" type="submit">Enviar</button>
+              </form>
+            </div>
+          </div>
         </div>
-
       </div>
-    </section> {% endcomment %}
 
-
-    <!-- end client section -->
-
-  </div>
-  </section>
-
-{% block footer %}
-  <!-- footer section -->
-  <section class="container-fluid footer_section">
-    <p>
-      &copy; 2024 Todos os Direitos Reservados
-      <a href="">Ricardo Zito</a>
-    </p>
-  </section>
-  <!-- footer section -->
-{% endblock %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('.btn-1').on('click', function(e) {
-      e.preventDefault();
-      var target = $($(this).attr('href'));
-      if (target.length) {
-        $('html, body').animate({
-          scrollTop: target.offset().top
-        }, 1500); // Tempo de duração da animação em milissegundos (1000ms = 1s)
-      }
-    });
-  });
-</script>
-<script type="text/javascript" src="{% static 'templates/js/jquery-3.4.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'templates/js/bootstrap.js' %}"></script>
+      <!-- footer section -->
+      <footer class="footer_section fixed-bottom bg-dark">
+        <div class="container">
+          <p class="text-center">
+            &copy; 2024 Todos os Direitos Reservados
+            <a href="#">Ricardo Zito</a>
+          </p>
+        </div>
+      </footer>
+      <!-- footer section -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function () {
+          $('.btn-1').on('click', function (e) {
+            e.preventDefault();
+            var target = $($(this).attr('href'));
+            if (target.length) {
+              $('html, body').animate({
+                scrollTop: target.offset().top
+              }, 1500); // Tempo de duração da animação em milissegundos (1000ms = 1s)
+            }
+          });
+        });
+      </script>
+      <script type="text/javascript" src="{% static 'templates/js/jquery-3.4.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'templates/js/bootstrap.js' %}"></script>
 
 </body>
 

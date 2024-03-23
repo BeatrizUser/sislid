@@ -20,10 +20,10 @@ class PessoaAdmin(admin.ModelAdmin):
             'fields': ('rua', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'),
         }),
     )
-    search_fields = ['lideranca__nome'] 
+    search_fields = ['nome'] 
 
     def validar_titulo(self, obj):
-        if obj.zona_eleitoral and obj.secao_eleitoral:
+        if obj.zona_eleitoral.isdigit() and obj.secao_eleitoral.isdigit():
             local, _, _, _ = preencher_local_de_votacao_cached(int(obj.zona_eleitoral), int(obj.secao_eleitoral))
             if local:
                 return local

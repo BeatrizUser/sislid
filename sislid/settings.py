@@ -26,12 +26,11 @@ SECRET_KEY = 'django-insecure-k^y$-a_%iz-54t(#d0-(@+-!^e!94%7az(ehzdw)%u1jk-0xz&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '4e4beec7f9afb5761f039090ca2a1865.serveo.net']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.serveo.net']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://4e4beec7f9afb5761f039090ca2a1865.serveo.net',
+    'https://*.serveo.net',
 ]
-# Application definition
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -198,23 +197,14 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
 
     # Ocultar esses aplicativos ao gerar o menu lateral (por exemplo, auth)
-    "hide_apps": [],
+    "hide_apps": ["auth"],
 
     # Ocultar esses modelos ao gerar o menu lateral (por exemplo, auth.user)
     "hide_models": [],
 
     # Lista de aplicativos (e/ou modelos) para basear a ordem do menu lateral (não precisa conter todos os aplicativos/modelos)
-    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+    "order_with_respect_to": ["cadastro","blogZito", "gabineteOnline"],
 
-    # Links personalizados para adicionar aos grupos de aplicativos, chaveados no nome do aplicativo
-    "custom_links": {
-        "books": [{
-            "name": "Criar Mensagens", 
-            "url": "make_messages", 
-            "icon": "fas fa-comments",
-            "permissions": ["books.view_book"]
-        }]
-    },
 
     # Ícones personalizados para aplicativos/modelos do menu lateral Veja https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
     # para a lista completa de classes de ícones gratuitas 5.13.0
