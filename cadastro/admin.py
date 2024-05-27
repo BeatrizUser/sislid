@@ -20,7 +20,7 @@ class PessoaAdmin(admin.ModelAdmin):
             'fields': ('rua', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'cep'),
         }),
         ('Outros', {
-            'fields': ('filhos', 'grau_de_influencia'),
+            'fields': ('filhos', 'grau_de_influencia', 'observacao'),
         }),
     )
     search_fields = ['nome'] 
@@ -36,7 +36,7 @@ class PessoaAdmin(admin.ModelAdmin):
     def validar_titulo(self, obj):
         if obj.zona_eleitoral is not None and obj.secao_eleitoral is not None:
             if obj.zona_eleitoral.isdigit() and obj.secao_eleitoral.isdigit():
-                local, _, _, _ = preencher_local_de_votacao_cached(int(obj.zona_eleitoral), int(obj.secao_eleitoral))
+                local, _, _, _ = self.preencher_local_de_votacao_cached(int(obj.zona_eleitoral), int(obj.secao_eleitoral))
                 if local:
                     return local
                 else:
@@ -53,31 +53,34 @@ class PessoaAdmin(admin.ModelAdmin):
             obj.criado_por = request.user
         super().save_model(request, obj, form, change)
 
-def preencher_local_de_votacao_cached(zona, secao):
-    CACHE_FILE = "locais.json"
-    try:
-        if os.path.exists(CACHE_FILE):
-            with open(CACHE_FILE, "r") as file:
-                locais_votacao = json.load(file)
-        else:
-            # Se o arquivo de cache não existir, faz uma solicitação à API e salva os dados no cache
-            url = f"https://apps.tre-rj.jus.br/api-dados-abertos/locaisvotacao/municipio/S%C3%A3o%20Gon%C3%A7alo"
-            response = requests.get(url)
-            response.raise_for_status()  # Verifica se houve erro na requisição
-            locais_votacao = response.json()
-            with open(CACHE_FILE, "w") as file:
-                json.dump(locais_votacao, file)
+    def preencher_local_de_votacao_cached(self, zona, secao):
+        CACHE_FILE = "locais.json"
+        try:
+            if os.path.exists(CACHE_FILE):
+                with open(CACHE_FILE, "r") as file:
+                    locais_votacao = json.load(file)
+            else:
+                # Se o arquivo de cache não existir, faz uma solicitação à API e salva os dados no cache
+                url = f"https://apps.tre-rj.jus.br/api-dados-abertos/locaisvotacao/municipio/S%C3%A3o%20Gon%C3%A7alo"
+                response = requests.get(url)
+                response.raise_for_status()  # Verifica se houve erro na requisição
+                locais_votacao = response.json()
+                with open(CACHE_FILE, "w") as file:
+                    json.dump(locais_votacao, file)
 
-        # Procura o local de votação na lista de locais obtidos do cache
-        for local in locais_votacao:
-            secoes = local["secoes"].split(",")
-            if str(secao) in secoes and int(local["numZona"]) == zona:
-                return local["local"], local["endereco"], local["bairro"], local["cep"]
+            # Procura o local de votação na lista de locais obtidos do cache
+            for local in locais_votacao:
+                secoes = local["secoes"].split(",")
+                if str(secao) in secoes and int(local["numZona"]) == zona:
+                    return local["local"], local["endereco"], local["bairro"], local["cep"]
 
-    except Exception as e:
-        print(f"Erro ao buscar locais de votação: {e}")
+        except Exception as e:
+            print(f"Erro ao buscar locais de votação: {e}")
 
-    return None, None, None, None
+        return None, None, None, None
+
+admin.site.register(Pessoa, PessoaAdmin)
+
 
 class LiderancaAdmin(admin.ModelAdmin):
     list_display = ['exibir_foto', 'nome', 'bairro_de_atuacao', 'telefone_whatsapp', 'tipo_de_atuacao', 'acordo_link']
@@ -86,19 +89,5 @@ class LiderancaAdmin(admin.ModelAdmin):
     def acordo_link(self, obj):
         if obj.acordo:
             return format_html('<a href="{}" target="_blank">Visualizar</a>', obj.acordo.url)
-        else:
-            return '-'
+       
 
-    acordo_link.short_description = 'Acordo'
-
-    def exibir_foto(self, obj):
-        if obj.foto:
-            foto_url = settings.MEDIA_URL + str(obj.foto)
-            return format_html('<img src="{}" style="height: 50px; width: 50px;" />', foto_url)
-        else:
-            return 'Sem foto'
-
-    exibir_foto.short_description = 'Foto'
-
-admin.site.register(Lideranca, LiderancaAdmin)
-admin.site.register(Pessoa, PessoaAdmin)

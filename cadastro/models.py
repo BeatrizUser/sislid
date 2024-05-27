@@ -33,10 +33,10 @@ class Pessoa(models.Model):
     estado = models.CharField(max_length=50, blank=True, null=True)
     cep = models.CharField(max_length=10)
     idade = models.IntegerField(blank=True, null=True)
-    titulo_eleitor = models.CharField(max_length=20, unique=True)
+    titulo_eleitor = models.CharField(max_length=20, blank=True, null=True, unique=True)
     zona_eleitoral = models.CharField(max_length=10, blank=True, null=True)
     secao_eleitoral = models.CharField(max_length=10, blank=True, null=True)
-    local_de_votacao = models.CharField(max_length=100)
+    local_de_votacao = models.CharField(max_length=100, blank=True, null=True)
     nome_mae = models.CharField(max_length=100, blank=True, null=True)
     nao_consta = models.BooleanField(default=False)
     apto_a_votar = models.BooleanField(default=False)
@@ -45,6 +45,7 @@ class Pessoa(models.Model):
     grau_de_influencia = models.CharField(max_length=10, choices=[('baixo', 'Baixo'), ('medio', 'Médio'), ('alto', 'Alto'), ('nenhum', 'Nenhum')])
     lideranca = models.ForeignKey(Lideranca, on_delete=models.CASCADE)
     criado_por = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    observacao = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.calcular_idade()
