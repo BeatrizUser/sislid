@@ -1,0 +1,7 @@
+tunnels:
+  sislid:
+    addr: 3000
+    proto: http
+  metabase:
+    addr: 8000
+    proto: http

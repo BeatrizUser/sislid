@@ -1,122 +1,82 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'templates/css/bootstrap.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'templates/css/formcss.css' %}"
-    />
-    <script
-      type="text/javascript"
-      src="{% static 'templates/js/jquery-3.4.1.min.js' %}"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{% static 'templates/js/bootstrap.js' %}"
-    ></script>
-    <title>Cadastro Social</title>
-  </head>
-  <body>
-    <div class="d-flex align-items-center justify-content-center">
-      <h3>Cadastro Social</h3>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pessoa</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Cadastro de Pessoa</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" required>
+            </div>
+            <div class="form-group">
+                <label for="genero">Gênero:</label>
+                <select class="form-control" id="genero" name="genero">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="text" class="form-control" id="telefone" name="telefone">
+            </div>
+            <div class="form-group">
+                <label for="whatsapp">WhatsApp:</label>
+                <input type="text" class="form-control" id="whatsapp" name="whatsapp">
+            </div>
+            <div class="form-group">
+                <label for="titulo_eleitor">Título de Eleitor:</label>
+                <input type="text" class="form-control" id="titulo_eleitor" name="titulo_eleitor">
+            </div>
+            <div class="form-group">
+                <label for="zona">Zona Eleitoral:</label>
+                <input type="text" class="form-control" id="zona" name="zona">
+            </div>
+            <div class="form-group">
+                <label for="secao">Seção Eleitoral:</label>
+                <input type="text" class="form-control" id="secao" name="secao">
+            </div>
+            <div class="form-group">
+                <label for="apto_votar">Apto a Votar?</label>
+                <input type="checkbox" id="apto_votar" name="apto_votar">
+            </div>
+            <div class="form-group">
+                <label for="votante">Votante?</label>
+                <input type="checkbox" id="votante" name="votante">
+            </div>
+            <div class="form-group">
+                <label for="filhos">Filhos:</label>
+                <input type="checkbox" class="form-control" id="filhos" name="filhos">
+            </div>            
+            <div class="form-group">
+                <label for="grau_influencia">Grau de Influência:</label>
+                <select class="form-control" id="grau_influencia" name="grau_influencia">
+                    <option value="Baixo">Baixo</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Alto">Alto</option>
+                    <option value="Nenhum">Nenhum</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
     </div>
-    <div class="container">
-      <form method="post">
-        {% csrf_token %}
-        <div class="row">
-          <h5>Informações Pessoais</h5>
-          <div class="input-group input-group-icon">
-            <input type="text" name="nome" placeholder="Nome Completo" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="email" name="email" placeholder="Endereço de Email" />
-          </div>
-          <h5>Endereco</h5>
-          <div class="input-group input-group-icon">
-            <input type="text" name="rua" placeholder="Rua" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="numero" placeholder="Número" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="complemento" placeholder="Complemento" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="bairro" placeholder="Bairro" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="cidade" placeholder="Cidade" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="estado" placeholder="Estado" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="cep" placeholder="CEP" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="sexo" placeholder="Sexo" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="idade" placeholder="Idade" />
-          </div>
-          <h5>Informações Adicionais</h5>
-          <div class="input-group input-group-icon">
-            <input
-              type="text"
-              name="titulo_eleitor"
-              placeholder="Título de Eleitor"
-            />
-          </div>
-          <div class="input-group input-group-icon">
-            <input
-              type="text"
-              name="zona_eleitoral"
-              placeholder="Zona Eleitoral"
-            />
-          </div>
-          <div class="input-group input-group-icon">
-            <input
-              type="text"
-              name="secao_eleitoral"
-              placeholder="Seção Eleitoral"
-            />
-          </div>
-          <div class="input-group input-group-icon">
-            <input
-              type="text"
-              name="local_de_votacao"
-              placeholder="Local de Votação"
-            />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="text" name="nome_mae" placeholder="Nome da Mãe" />
-          </div>
-          <div class="input-group input-group-icon">
-            <input type="checkbox" name="nao_consta" id="nao_consta" />
-            <label for="nao_consta">Não Consta</label>
-          </div>
-          <h5>Responsavel</h5>
-          <div class="input-group input-group-icon">
-            <select name="lideranca">
-              <option value="">Selecione uma Liderança</option>
-              <!-- Inserir as opções de liderança aqui -->
-            </select>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-warning btn-lg">Enviar</button>
-      </form>
-    </div>
-  </body>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

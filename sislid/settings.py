@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-k^y$-a_%iz-54t(#d0-(@+-!^e!94%7az(ehzdw)%u1jk-0xz&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.serveo.net']
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.serveo.net',
@@ -136,8 +136,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000  # Defina um valor maior conforme necessário
-
 JAZZMIN_SETTINGS = {
     # título da janela (padrão: current_admin_site.site_title se ausente ou None)
     "site_title": "SISLID",
@@ -158,7 +156,7 @@ JAZZMIN_SETTINGS = {
     "login_logo_dark": "img/logo2.png",
 
     # Classes CSS que são aplicadas ao logotipo acima
-    "site_logo_classes": "img-square",
+    "site_logo_classes": "img-circle",
 
     # Caminho relativo para um favicon para seu site, padrão: site_logo se ausente (idealmente 32x32 px)
     "site_icon": "img/logo.png",
@@ -197,7 +195,7 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
 
     # Ocultar esses aplicativos ao gerar o menu lateral (por exemplo, auth)
-    "hide_apps": ["auth"],
+    "hide_apps": [],
 
     # Ocultar esses modelos ao gerar o menu lateral (por exemplo, auth.user)
     "hide_models": [],
@@ -261,16 +259,14 @@ JAZZMIN_SETTINGS = {
     # - vertical_tabs
     # - collapsible
     # - carousel
-    "changeform_format": "horizontal_tabs",
-    # substituir formatos de formulário de alteração com base em administração de modelo
-    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+    "changeform_format": "single",
 
     
 }
 
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
-    "footer_small_text": False,
+    "footer_small_text": True,
     "body_small_text": True,
     "brand_small_text": False,
     "brand_colour": "navbar-teal",

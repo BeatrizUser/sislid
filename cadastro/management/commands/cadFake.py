@@ -111,7 +111,7 @@ class Command(BaseCommand):
         ]
 
 
-        for _ in range(4352):  # Altere o número conforme necessário
+        for _ in range(40000):  # Altere o número conforme necessário
             lideranca = random.choice(liderancas)
             bairro = random.choice(bairros_sao_goncalo)
             pessoa = Pessoa(
