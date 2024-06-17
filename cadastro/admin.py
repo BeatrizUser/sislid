@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from .models import Lideranca, Pessoa
 
 class PessoaAdmin(admin.ModelAdmin):
-    list_display = ('criado_por', 'nome', 'data_de_nascimento', 'calcular_idade','genero', 'telefone', 'whatsapp', 'bairro', 'lideranca', 'zona_eleitoral', 'secao_eleitoral', 'apto_a_votar', 'votante', 'filhos', 'grau_de_influencia', 'validar_titulo')
+    list_display = ('nome', 'data_de_nascimento', 'calcular_idade','genero', 'telefone', 'whatsapp', 'bairro', 'lideranca', 'zona_eleitoral', 'secao_eleitoral', 'apto_a_votar', 'votante', 'filhos', 'grau_de_influencia', 'validar_titulo', 'criado_por')
     fieldsets = (
         ('Dados Cadastrais', {
             'fields': ('nome', 'data_de_nascimento', 'genero', 'telefone', 'whatsapp', 'email', 'lideranca')
@@ -23,6 +23,7 @@ class PessoaAdmin(admin.ModelAdmin):
             'fields': ('filhos', 'grau_de_influencia', 'observacao'),
         }),
     )
+    list_filter = ('lideranca',)
     search_fields = ['nome'] 
 
     def get_queryset(self, request):
@@ -83,11 +84,5 @@ admin.site.register(Pessoa, PessoaAdmin)
 
 
 class LiderancaAdmin(admin.ModelAdmin):
-    list_display = ['exibir_foto', 'nome', 'bairro_de_atuacao', 'telefone_whatsapp', 'tipo_de_atuacao', 'acordo_link']
-    readonly_fields = ['acordo_link']
-    
-    def acordo_link(self, obj):
-        if obj.acordo:
-            return format_html('<a href="{}" target="_blank">Visualizar</a>', obj.acordo.url)
-       
-
+    list_display = ['exibir_foto', 'nome', 'bairro_de_atuacao', 'telefone_whatsapp', 'tipo_de_atuacao']
+admin.site.register(Lideranca, LiderancaAdmin)

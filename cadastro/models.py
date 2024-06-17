@@ -15,12 +15,19 @@ class Lideranca(models.Model):
     acordo = models.FileField(upload_to='acordos/', blank=True, null=True)
     foto = models.ImageField(upload_to='liderancas/', blank=True, null=True)
 
+    def exibir_foto(self):
+        if self.foto:
+            return format_html('<img src="{}" width="50" height="50" />'.format(self.foto.url))
+        return 'Sem foto'
+    
+    exibir_foto.short_description = 'Foto'
+
     def __str__(self):
         return self.nome
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100)
-    data_de_nascimento = models.DateField(blank=True, null=True)
+    data_de_nascimento = models.DateField(blank=True, null=True, help_text = "Exemplo: 01/01/1990")
     genero = models.CharField(max_length=10, choices=SEXO_CHOICES)
     telefone = models.CharField(max_length=15, blank=True, null=True)
     whatsapp = models.CharField(max_length=15, blank=True, null=True)
@@ -31,7 +38,7 @@ class Pessoa(models.Model):
     bairro = models.CharField(max_length=100, blank=True, null=True)
     cidade = models.CharField(max_length=100, blank=True, null=True)
     estado = models.CharField(max_length=50, blank=True, null=True)
-    cep = models.CharField(max_length=10)
+    cep = models.CharField(max_length=10, blank=True, null=True)
     idade = models.IntegerField(blank=True, null=True)
     titulo_eleitor = models.CharField(max_length=20, blank=True, null=True, unique=True)
     zona_eleitoral = models.CharField(max_length=10, blank=True, null=True)
@@ -45,7 +52,7 @@ class Pessoa(models.Model):
     grau_de_influencia = models.CharField(max_length=10, choices=[('baixo', 'Baixo'), ('medio', 'Médio'), ('alto', 'Alto'), ('nenhum', 'Nenhum')])
     lideranca = models.ForeignKey(Lideranca, on_delete=models.CASCADE)
     criado_por = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    observacao = models.TextField(blank=True, null=True)
+    observacao = models.TextField(blank=True, null=True, verbose_name="Histórico")
 
     def save(self, *args, **kwargs):
         self.calcular_idade()
@@ -75,7 +82,7 @@ class Pessoa(models.Model):
             try:
                 # Tenta converter a data para um formato válido
                 if isinstance(self.data_de_nascimento, str):
-                    self.data_de_nascimento = datetime.strptime(self.data_de_nascimento, '%d%m%Y').date()
+                    self.data_de_nascimento = datetime.strptime(self.data_de_nascimento, '%DD/%MM/%YYYY').date()
             except ValueError:
                 raise ValidationError('Formato de data inválido. Use DDMMYYYY.')
 
