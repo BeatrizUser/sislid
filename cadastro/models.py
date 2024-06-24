@@ -38,7 +38,7 @@ class Pessoa(models.Model):
     bairro = models.CharField(max_length=100, blank=True, null=True)
     cidade = models.CharField(max_length=100, blank=True, null=True)
     estado = models.CharField(max_length=50, blank=True, null=True)
-    cep = models.CharField(max_length=10, blank=True, null=True)
+    cep = models.CharField(max_length=10, default='000')
     idade = models.IntegerField(blank=True, null=True)
     titulo_eleitor = models.CharField(max_length=20, blank=True, null=True, unique=True)
     zona_eleitoral = models.CharField(max_length=10, blank=True, null=True)
