@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from .models import Lideranca, Pessoa
 
 class PessoaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'data_de_nascimento', 'calcular_idade','genero', 'telefone', 'whatsapp', 'bairro', 'lideranca', 'zona_eleitoral', 'secao_eleitoral', 'apto_a_votar', 'votante', 'filhos', 'grau_de_influencia', 'validar_titulo', 'criado_por')
+    list_display = ('nome', 'data_de_nascimento', 'calcular_idade','genero', 'telefone', 'whatsapp','whatsapp_button', 'bairro', 'lideranca', 'zona_eleitoral', 'secao_eleitoral', 'apto_a_votar', 'votante', 'filhos', 'grau_de_influencia', 'validar_titulo', 'criado_por')
     fieldsets = (
         ('Dados Cadastrais', {
             'fields': ('nome', 'data_de_nascimento', 'genero', 'telefone', 'whatsapp', 'email', 'lideranca')
@@ -24,7 +24,15 @@ class PessoaAdmin(admin.ModelAdmin):
         }),
     )
     list_filter = ('lideranca',)
-    search_fields = ['nome'] 
+    search_fields = ['nome']
+
+    def whatsapp_button(self, obj):
+        if obj.whatsapp:
+            return mark_safe(f'<a href="{obj.whatsapp_link()}" target="_blank"><i class="fab fa-whatsapp"></i> Enviar Mensagem</a>')
+        return ''
+
+    whatsapp_button.allow_tags = True  # para versões antigas do Django
+    whatsapp_button.short_description = 'WhatsApp'
 
     def get_queryset(self, request):
         qs = super().get_queryset(request).select_related('lideranca')

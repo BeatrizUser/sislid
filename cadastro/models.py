@@ -54,6 +54,11 @@ class Pessoa(models.Model):
     criado_por = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     observacao = models.TextField(blank=True, null=True, verbose_name="Histórico")
 
+    def whatsapp_link(self):
+        if self.whatsapp:
+            return f'https://api.whatsapp.com/send?phone={self.whatsapp}'
+        return ''
+
     def save(self, *args, **kwargs):
         self.calcular_idade()
         self.verificar_votante()
