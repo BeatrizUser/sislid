@@ -1,3 +1,5 @@
+version: "2"
+authtoken: 2XktjFhiszv6HL7fPLPOP2Krjmv_7ywY1YPX61DpsDZuoCsAZ
 tunnels:
   sislid:
     addr: 3000

@@ -221,7 +221,7 @@ JAZZMIN_SETTINGS = {
          "permissions": ["auth.view_user"]},
         {
             "name": "Análises",
-            "url": "http://localhost:3000/question/1-pessoas-lid-por-bairro",
+            "url": "https://metabase.sislid.net",
             "new_window": True,
             "permissions": ["auth.view_user"],  
         },
